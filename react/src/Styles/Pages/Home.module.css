@@ -1,0 +1,41 @@
+
+  .navbar {
+    background-color: #1b2938;
+  }
+
+ 
+.content {
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 60px;
+  max-width: 600px;
+  font-size: 20px;
+  line-height: 1.3em;
+}
+
+  .content code {
+    background-color: #cbe9ff;
+    border-radius: 2px;
+    font-size: 1em;
+    padding: 0 5px;
+  }
+
+.content button {
+    color: #006688;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    padding: 0;
+  }
+
+body.dark-mode .content code {
+  background-color: #1b2938;
+}
+
+body.dark-mode .content a {
+  color: #ee09;
+}
+
+body.dark-mode .content button {
+  color: #ee09;
+}
