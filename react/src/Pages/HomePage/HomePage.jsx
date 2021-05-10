@@ -1,21 +1,22 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
 import { useQuery, useQueryClient } from 'react-query';
 import { Link } from "react-router-dom";
+import useDarkMode from 'use-dark-mode';
 import { getRawgApi } from '../../Api';
 import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 import GameCard from '../../Components/GameCard'
 import styles from '../../Styles/Pages/Home.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
+import { faArrowAltCircleRight } from "@fortawesome/free-regular-svg-icons";
 
 export default function HomePage(props) {
-  const queryClient = useQueryClient()
-  const [page, setPage] = useState(Number(1))
-
-  let history = useHistory();
-
-  function handleClick() {
-    history.push(`/game`);
-  }
+  const [page, setPage] = useState(Number(1));
+  const { value } = useDarkMode(false);
+  const queryClient = useQueryClient();
+  const left = <FontAwesomeIcon icon={ faArrowAltCircleLeft} />;
+  const right = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
 
   const { 
     status, 
@@ -37,42 +38,47 @@ export default function HomePage(props) {
     }
   }, [data, page, queryClient]);
 
-
   return (
     <Fragment>
       <Header />
       <div className={styles.content}>
-      <div>
-        {status === 'loading' ? (
-          <div>Loading...</div>
-        ) : status === 'error' ? (
-          <div>Error: {error.message}</div>
-        ) : (
-          <div>
-            {data.results.map(game => (
-              // <GameCard game={game} key={game.id}/>
-              // <Link key={game.id} to={`/game/${game.id}`}>{game.name}</Link>
-              <p key={game.id}>{game.name} <Link key={game.id} to={`/game/${game.id}`}>{game.id}</Link></p>
-            ))}
+        <div>
+          {status === 'loading' ? (
+            <div></div>
+          ) : status === 'error' ? (
+            <div>Error: {error.message}</div>
+          ) : (
+            <Fragment>
+              <div>
+                {data.results.map(game => (
+                  // <GameCard game={game} key={game.id}/>
+                  <p key={game.id}>🎮 {game.name} <Link key={game.id} to={`/game/${game.id}`}>{game.id}</Link></p>
+                ))}
+              </div>
+              <a
+              type="button"
+                onClick={() => setPage(old => Math.max(old - 1, 0))}
+                className={!value ? "btn btn-outline-dark mb-4" : "btn btn-outline-light mb-4"}
+                disabled={page === 1}
+              >
+                <i>{left}</i> Previous Page 
+              </a>{' '}
+              <a
+                type="button"
+                className={!value ? "btn btn-outline-dark mb-4" : "btn btn-outline-light mb-4"}
+                onClick={() => {
+                  setPage(old => (data?.results ? old + 1 : old))
+                }}
+                disabled={isPreviousData || !data?.results}
+              >
+                Next Page <i>{right}</i>
+              </a>
+            </Fragment>
+          )}
+          { isFetching ? <span></span> : null }{' '}
           </div>
-        )}
-        <button
-          onClick={() => setPage(old => Math.max(old - 1, 0))}
-          disabled={page === 1}
-        >
-          Previous Page
-        </button>{' '}
-        <button
-          onClick={() => {
-            setPage(old => (data?.results ? old + 1 : old))
-          }}
-          disabled={isPreviousData || !data?.results}
-        >
-          Next Page
-        </button>
-        { isFetching ? <span> Loading...</span> : null }{' '}
-        </div>
-      </div> 
+        </div> 
+        <Footer/>
       </Fragment>
   )
 };

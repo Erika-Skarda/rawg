@@ -39,28 +39,10 @@ h5 {
 
 :root {
   --yellow: #ffe600; 
-
   --white: #fff;
-  --bg: #110A27;
+  --bg: #343a40;
   --text: #333;
   --lightText: #dfdfdf;
-
-    /* breakpoints: */
-
-    --desktopInput: 1216px;
-    --desktop: 1440px;
-    --mobile: 360px;
-    --mediumDevice: 768px;
-    
-    /* gutter */
-    --gutterSm: 1rem;
-    --gutterMw: 2rem;
-    --gutterLg: 3rem;
-  
-    /* border-radius  */
-    --border-radius: 4px;
-    
-    --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 /* DARK MODE */

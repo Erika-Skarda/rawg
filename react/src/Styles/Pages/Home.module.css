@@ -8,13 +8,14 @@
   padding: 20px;
   margin: 0 auto;
   margin-top: 60px;
+  margin-bottom: 60px;
   max-width: 600px;
   font-size: 20px;
   line-height: 1.3em;
 }
 
   .content code {
-    background-color: #cbe9ff;
+    background-color: #878e92;
     border-radius: 2px;
     font-size: 1em;
     padding: 0 5px;

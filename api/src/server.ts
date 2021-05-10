@@ -16,7 +16,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// Background Header  -> providing a constant endpoint for a random top rated videogame
 app.get('/', async (req: Request, res: Response) => {
   res.set('Cache-Control', 'no-cache');
   let url = `${baseUrl}?key=${rawgApiKey}&ordering=-added&page_size=10`
@@ -32,7 +31,6 @@ app.get('/', async (req: Request, res: Response) => {
   })
 });
 
-// providing a constant endpoint for trending videogames
 app.get('/trending', async (req: Request, res: Response) => {
   res.set('Cache-Control', 'no-cache');
   const { page } = req.query;
@@ -49,13 +47,11 @@ app.get('/trending', async (req: Request, res: Response) => {
   console.log(url)
 });
 
- // providing a dynamic endpoint to videogame detail pages
  app.get('/:rawId', async (req: Request, res: Response) => {
   res.set('Cache-Control', 'no-cache');
   const { rawId } = req.params;
   let url = `${baseUrl}/${rawId}?key=${rawgApiKey}`
   await axios.get(url)
-  
   .then(response => {
     return res.status(200).send(response.data)
   })
@@ -64,6 +60,21 @@ app.get('/trending', async (req: Request, res: Response) => {
       return res.status(400).send(err)
   })
   console.log(url)
+});
+
+app.get('/:rawId/developers', async (req: Request, res: Response) => {
+  res.set('Cache-Control', 'no-cache');
+  const { rawId } = req.params;
+  let urlDevelopers = `${baseUrl}/${rawId}/development-team?key=${rawgApiKey}`
+  await axios.get(urlDevelopers)
+  .then(response => {
+    return res.status(200).send(response.data)
+  })
+  .catch(err => {
+      console.log(err.data);
+      return res.status(400).send(err)
+  })
+  console.log(urlDevelopers)
 });
 
 if(process.env.NODE_ENV !== "serveless") {
