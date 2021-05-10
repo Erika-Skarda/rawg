@@ -8,6 +8,7 @@ import { faLinux } from "@fortawesome/free-brands-svg-icons";
 import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 import { faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import styles from '../../Styles/Components/TitleGame.module.css';
 
 export default function TitleGame({ info }) {
   const playStation = <FontAwesomeIcon icon={faPlaystation} />;
@@ -26,21 +27,53 @@ export default function TitleGame({ info }) {
   const getPlatform = (game) => {
     switch (game) {
       case ('playstation') :
-        return <i>{playStation}</i>
-      case 'xbox':
-        return <i>{xBox}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{playStation}</i>
+          </a>
+        );
+      case 'xbox': 
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{xBox}</i>
+          </a>
+        );
       case 'pc':
-        return <i>{pc}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{pc}</i>
+          </a>
+        );
       case 'nintendo':
-        return <i>{nintendo}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{nintendo}</i>
+          </a>
+        );
       case 'mac':
-        return <i>{mac}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{mac}</i>
+          </a>
+        );
       case 'linux':
-        return <i>{linux}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{linux}</i>
+          </a>
+        );
       case 'ios':
-        return <i>{ios}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{ios}</i>
+          </a>
+        );
       case 'android':
-        return <i>{android}</i>
+        return (
+          <a data-bs-toggle="tooltip" data-bs-placement="top" title={game}>
+            <i>{android}</i>
+          </a>
+        );
       default:
         console.log(`Without image`);
     }
@@ -59,19 +92,32 @@ export default function TitleGame({ info }) {
           </span>
         ))}
       </section>
-       {info.genres.length < 1 ? (
-        <section id='genres' className='my-2'>
-          {' '}
-        </section>
-      ) : (
-        <section id='genres' className='my-2'>
-          {info.genres.map((genre, index) => (
-            <div key ={index} className="badge rounded-pill bg-dark ms-2">
-              {genre.name}
-            </div>
-          ))}
-        </section>
-      )}
+      
+      <div className={styles.div}>
+        {info.genres.length < 1 ? (
+          <section id='genres' className='my-2'>
+            {' '}
+          </section>
+        ) : (
+          <section id='genres' className='my-2'>
+            {info.genres.map((genre, index) => (
+              <div key ={index} className="badge rounded-pill bg-dark ms-2">
+                {genre.name}
+              </div>
+            ))}
+          </section>
+        )}
+        {info.metacritic !== null && (
+          <section id='metacritic' className='my-2'>
+            <a data-bs-toggle="tooltip" data-bs-placement="top" title='metascore'>
+              <ul className={styles.ul}>
+                <li>{info.metacritic}</li>
+              </ul>
+            </a>
+          </section>
+        )}
+      </div>
+ 
     </header>
   );
 }

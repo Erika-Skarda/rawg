@@ -2,8 +2,7 @@
   .navbar {
     background-color: #1b2938;
   }
-
- 
+  
 .content {
   padding: 20px;
   margin: 0 auto;
@@ -11,7 +10,6 @@
   margin-bottom: 60px;
   max-width: 600px;
   font-size: 20px;
-  line-height: 1.3em;
 }
 
   .content code {

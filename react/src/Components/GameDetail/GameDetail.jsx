@@ -10,11 +10,11 @@ export default function GameDetail({ info, id }) {
     data, 
     error, 
   } = useQuery('developer', () => getDevelopers(id));
-
+  console.log(data)
   const getBackground = () => {
     try {
       let background;
-     info.background_image_additional ? (background = info.background_image_additional) : (background =info.background_image);
+     info.background_image_additional ? (background = info.background_image_additional) : (background = info.background_image);
 
       if (background) {
         background.match(/media\/screenshots/)
@@ -31,7 +31,7 @@ export default function GameDetail({ info, id }) {
     try {
       let poster;
       if (info.background_image) {
-       info.background_image.match(/media\/screenshots/)
+        info.background_image.match(/media\/screenshots/)
           ? (poster = info.background_image.replace('media/screenshots', 'media/crop/600/400/screenshots'))
           : (poster = info.background_image.replace('media/games', 'media/crop/600/400/games'));
       }
@@ -65,7 +65,7 @@ export default function GameDetail({ info, id }) {
           <div>Error: {error.message}</div>
           ) : (
             <Fragment>
-              {data.count > 0 ? (
+              {status === 'success' && data.count > 0 ? (
                 <Fragment>
                   <ul className='row list-unstyled list-group p-4 list-group-horizontal'>
                   <h4>Developers:</h4>

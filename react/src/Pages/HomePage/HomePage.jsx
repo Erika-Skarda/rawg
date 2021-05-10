@@ -51,8 +51,7 @@ export default function HomePage(props) {
             <Fragment>
               <div>
                 {data.results.map(game => (
-                  // <GameCard game={game} key={game.id}/>
-                  <p key={game.id}>🎮 {game.name} <Link key={game.id} to={`/game/${game.id}`}>{game.id}</Link></p>
+                  <GameCard game={game} key={game.id}/>
                 ))}
               </div>
               <a

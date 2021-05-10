@@ -36,3 +36,12 @@ export const getDevelopers = async (id) => {
       console.error(error.response)
   }
 }; 
+
+export const getScreenshots = async (id) => {
+  try {
+      const { data } = await axios.get(`${baseUrl}/${id}/screenshots`);
+      return data;
+  } catch(error) {
+      console.error(error.response)
+  }
+}; 

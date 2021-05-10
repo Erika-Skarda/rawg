@@ -44,7 +44,6 @@ app.get('/trending', async (req: Request, res: Response) => {
       console.log(err.data);
       return res.status(400).send(err)
   })
-  console.log(url)
 });
 
  app.get('/:rawId', async (req: Request, res: Response) => {
@@ -59,7 +58,6 @@ app.get('/trending', async (req: Request, res: Response) => {
       console.log(err.data);
       return res.status(400).send(err)
   })
-  console.log(url)
 });
 
 app.get('/:rawId/developers', async (req: Request, res: Response) => {
@@ -77,6 +75,19 @@ app.get('/:rawId/developers', async (req: Request, res: Response) => {
   console.log(urlDevelopers)
 });
 
+app.get('/:rawId/screenshots', async (req: Request, res: Response) => {
+  res.set('Cache-Control', 'no-cache');
+  const { rawId } = req.params;
+  let url = `${baseUrl}/${rawId}/screenshots?key=${rawgApiKey}`
+  await axios.get(url)
+  .then(response => {
+    return res.status(200).send(response.data)
+  })
+  .catch(err => {
+      console.log(err.data);
+      return res.status(400).send(err)
+  })
+});
 if(process.env.NODE_ENV !== "serveless") {
   const server = app.listen(3333, () => {
     if (server) {

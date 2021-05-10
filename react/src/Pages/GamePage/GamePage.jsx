@@ -4,6 +4,7 @@ import { getGameById } from '../../Api';
 import Header from '../../Components/Header';
 import TitleGame from '../../Components/TitleGame';
 import GameDetail from '../../Components/GameDetail';
+import GameCarousel from '../../Components/GameCarousel';
 import Loading from '../../Components/Loading';
 
 export default function GamePage({ match }) {
@@ -26,8 +27,9 @@ export default function GamePage({ match }) {
     <Fragment>
       <Header />
       <main className='container'>
-      <TitleGame info={data}>{(document.title = `${data.name} | Trending on RAWG`)}</TitleGame>
-      <GameDetail info={data} id={id} />
+        <TitleGame info={data}>{(document.title = `${data.name} | Trending on RAWG`)}</TitleGame>
+        <GameDetail info={data} id={id} />
+        {/* <GameCarousel info={data} id={id} /> */}
       </main>
     </Fragment>
   );

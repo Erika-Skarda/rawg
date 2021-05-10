@@ -1,17 +1,34 @@
-.avatar {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border:2px solid #6dc849;
+.div {
+  display: flex;
+  justify-content: space-between;
+}
+.ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
 }
 
-.avatar li i {
+.ul li {
+  list-style-type: none;
+  width: 50px;
+  height: 50px;
+  margin: 0 20px;
+  border:2px solid #6dc849;
+  border-radius: 50%;
+  transition: all 0.5s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ul li i {
   font-size: 48px;
   color: #6dc849;
   transition: 0.5s;
 }
 
-.avatar li:before {
+.ul li:before {
   content: '';
   position: absolute;
   top: 0;
@@ -25,12 +42,12 @@
   z-index: -1;
 }
 
-.avatar li:hover:before {
+.ul li:hover:before {
   opacity: 1;
   transform: scale(0.8);
 }
 
-.avatar li:after {
+.ul li:after {
   content: '';
   position: absolute;
   top: 0;
@@ -46,7 +63,7 @@
   box-sizing: border-box;
 }
 
-.avatar li:hover:after {
+.ul li:hover:after {
   opacity: 1;
   animation: rotating 10s linear infinite;
 }
